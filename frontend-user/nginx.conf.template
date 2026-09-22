@@ -1,5 +1,8 @@
+# 由 nginx 官方镜像的 docker-entrypoint 用环境变量渲染（envsubst），
+# ${PORT} 来自根目录 .env（docker compose 注入）或 Dockerfile 的 APP_PORT。
+# 注意：nginx 自身的 $uri 等变量不受影响，只有环境变量会被替换。
 server {
-    listen 8081;
+    listen ${PORT};
     server_name localhost;
     root /usr/share/nginx/html;
     index index.html;

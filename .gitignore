@@ -10,7 +10,8 @@ build/
 out/
 
 # 环境变量
-.env
+# 注意：根目录 .env 是提交入库的共享默认值（端口等非敏感参数），
+# 这里只忽略本地覆盖文件
 .env.local
 .env.development.local
 .env.test.local

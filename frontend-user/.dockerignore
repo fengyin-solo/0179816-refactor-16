@@ -1,0 +1,15 @@
+# 本机依赖与构建产物不进入构建上下文：
+# 镜像内会重新 npm ci 并构建，避免把本机（如 macOS/Windows）的
+# 平台相关二进制（esbuild、rollup 等）带进 Linux 镜像导致运行错误
+node_modules
+dist
+
+# 版本控制与本地环境文件
+.git
+.env
+.env.*
+
+# 日志与临时文件
+*.log
+tmp
+temp

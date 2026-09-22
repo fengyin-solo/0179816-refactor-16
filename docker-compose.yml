@@ -1,17 +1,23 @@
+# 所有参数（端口、镜像版本）统一来自根目录 .env，与本地开发共用同一份定义。
+# 多平台镜像构建请使用 buildx，见 README「构建失败排查」一节。
 services:
   frontend-user:
     build:
       context: ./frontend-user
       dockerfile: Dockerfile
-      platforms:
-        - linux/amd64
-        - linux/arm64
+      args:
+        NODE_VERSION: ${NODE_VERSION}
+        NGINX_VERSION: ${NGINX_VERSION}
+        APP_PORT: ${PORT}
     container_name: guqin-audio-analyzer
     ports:
-      - "8081:8081"
+      - "${PORT}:${PORT}"
+    environment:
+      # 供容器内 nginx 配置模板渲染监听端口
+      - PORT=${PORT}
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:8081/"]
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:${PORT}/"]
       interval: 30s
       timeout: 10s
       retries: 3
