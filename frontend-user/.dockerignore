@@ -1,0 +1,23 @@
+# 依赖与产物一律在镜像内安装/生成，不使用宿主机内容，保证构建可复现
+node_modules
+dist
+
+# 版本控制与本地配置
+.git
+.gitignore
+.env
+.env.*
+
+# 日志与临时文件
+*.log
+npm-debug.log*
+
+# 编辑器 / 系统文件
+.vscode
+.idea
+*.swp
+.DS_Store
+
+# Docker 自身文件
+Dockerfile
+.dockerignore
